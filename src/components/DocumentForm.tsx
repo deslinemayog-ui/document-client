@@ -4,17 +4,11 @@ import { FloatingInput } from "@/components/FloatingInput";
 import { FloatingSelect } from "@/components/FloatingSelect";
 import { ArrowLeft, FileText, Loader2, Building2, User, CreditCard, Briefcase } from "lucide-react";
 import { toast } from "sonner";
+import { DocumentResponse } from "@/types/document";
 
 interface DocumentFormProps {
   onBack: () => void;
   onSuccess: (data: DocumentResponse) => void;
-}
-
-interface DocumentResponse {
-  status: number;
-  message: string;
-  bankstatements: string[];
-  payslips: string[];
 }
 
 const monthOptions = [
@@ -130,14 +124,18 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
 
       if (data.status === 1) {
         toast.success(data.message || "Documents generated successfully!");
-        // Map the new response format to the expected format
-        onSuccess({
+        // Ensure we have the arrays for bankstatements and payslips
+        const responseData = {
           ...data,
-          bankstatementUrl: data.bankstatements?.[0] || '',
-          payslip1: data.payslips?.[0] || '',
-          payslip2: data.payslips?.[1] || '',
-          payslip3: data.payslips?.[2] || ''
-        });
+          bankstatements: data.bankstatements || [],
+          payslips: data.payslips || [],
+          // Maintain backward compatibility
+          bankstatementUrl: data.bankstatementUrl || data.bankstatements?.[0] || '',
+          payslip1: data.payslip1 || data.payslips?.[0] || '',
+          payslip2: data.payslip2 || data.payslips?.[1] || '',
+          payslip3: data.payslip3 || data.payslips?.[2] || ''
+        };
+        onSuccess(responseData);
       } else {
         toast.error(data.message || "Failed to generate documents. Please try again.");
       }

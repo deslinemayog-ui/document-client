@@ -1,16 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Download, FileText, Check, ExternalLink, ShoppingBag } from "lucide-react";
+import { Download, FileText, Check, ExternalLink, ShoppingBag, Banknote } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-
-interface DocumentResponse {
-  status: number;
-  message: string;
-  bankstatementUrl: string;
-  payslip1: string;
-  payslip2: string;
-  payslip3: string;
-}
+import { DocumentResponse } from "@/types/document";
 
 interface DownloadModalProps {
   isOpen: boolean;
@@ -24,12 +16,47 @@ export const DownloadModal = ({ isOpen, onClose, data, onDocumentsDownloaded }: 
   
   if (!data) return null;
 
-  const documents = [
-    { name: "Bank Statement", url: data.bankstatementUrl, icon: FileText },
-    { name: "Payslip - Month 1", url: data.payslip1, icon: FileText },
-    { name: "Payslip - Month 2", url: data.payslip2, icon: FileText },
-    { name: "Payslip - Month 3", url: data.payslip3, icon: FileText },
-  ];
+  // Get all bank statements
+  const bankStatements = (data.bankstatements || []).map((url, index) => ({
+    name: `Bank Statement ${index + 1}`,
+    url,
+    icon: Banknote,
+    type: 'bank-statement' as const
+  }));
+
+  // Get all payslips
+  const payslips = (data.payslips || []).map((url, index) => ({
+    name: `Payslip - Month ${index + 1}`,
+    url,
+    icon: FileText,
+    type: 'payslip' as const
+  }));
+
+  // Combine all documents
+  const documents = [...bankStatements, ...payslips];
+
+  // Fallback to legacy format if no documents in the new format
+  if (documents.length === 0) {
+    if (data.bankstatementUrl) {
+      documents.push({
+        name: "Bank Statement",
+        url: data.bankstatementUrl,
+        icon: Banknote,
+        type: 'bank-statement'
+      });
+    }
+    
+    [data.payslip1, data.payslip2, data.payslip3].forEach((url, index) => {
+      if (url) {
+        documents.push({
+          name: `Payslip - Month ${index + 1}`,
+          url,
+          icon: FileText,
+          type: 'payslip'
+        });
+      }
+    });
+  }
 
   const handleDownload = (url: string, name: string) => {
     window.open(url, '_blank');
@@ -37,9 +64,11 @@ export const DownloadModal = ({ isOpen, onClose, data, onDocumentsDownloaded }: 
 
   const handleDownloadAll = () => {
     documents.forEach((doc, index) => {
-      setTimeout(() => {
-        window.open(doc.url, '_blank');
-      }, index * 500);
+      if (doc.url) {
+        setTimeout(() => {
+          window.open(doc.url, '_blank');
+        }, index * 500);
+      }
     });
     // Mark documents as downloaded
     onDocumentsDownloaded();

@@ -8,15 +8,7 @@ import { FAQSection } from "@/components/FAQSection";
 import { Footer } from "@/components/Footer";
 import { DocumentForm } from "@/components/DocumentForm";
 import { DownloadModal } from "@/components/DownloadModal";
-
-interface DocumentResponse {
-  status: number;
-  message: string;
-  bankstatementUrl: string;
-  payslip1: string;
-  payslip2: string;
-  payslip3: string;
-}
+import { DocumentResponse } from "@/types/document";
 
 const Index = () => {
   const [view, setView] = useState<"hero" | "form">("hero");
