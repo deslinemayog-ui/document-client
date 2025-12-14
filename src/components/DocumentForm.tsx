@@ -189,7 +189,7 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-8 px-4 sm:py-12 sm:px-6">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-4 px-2 sm:py-8 sm:px-4 md:py-12 md:px-6">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div 
@@ -206,7 +206,7 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
         />
       </div>
       
-      <div className="relative z-10 container mx-auto max-w-4xl">
+      <div className="relative z-10 w-full px-2 sm:container sm:mx-auto sm:max-w-4xl sm:px-4 md:px-6">
         {/* Back Button */}
         <Button
           variant="ghost"
@@ -261,7 +261,7 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
           <div className="space-y-6">
             <form
               onSubmit={handleSubmit}
-              className="space-y-4 sm:space-y-6"
+              className="space-y-2 sm:space-y-4 md:space-y-6"
             >
               <div className="backdrop-blur-sm bg-white/5 border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
               {/* Gradient header */}
@@ -352,7 +352,7 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
           </div>
 
           {/* Bank Information */}
-          <div className="glass-card rounded-2xl p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6">
+          <div className="glass-card rounded-2xl p-4 sm:p-6 md:p-8 space-y-3 sm:space-y-4 md:space-y-6">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2 rounded-lg bg-secondary/10 text-secondary">
                 <CreditCard className="w-5 h-5" />
@@ -467,9 +467,9 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
             </div>
             
             <Tabs defaultValue="managed" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 bg-muted/50">
+              <TabsList className="grid w-full grid-cols-1 sm:grid-cols-2 bg-muted/50">
                 <TabsTrigger value="managed">Managed Companies</TabsTrigger>
-                <TabsTrigger value="manual">Manual</TabsTrigger>
+                <TabsTrigger value="manual">Custom</TabsTrigger>
               </TabsList>
 
               <TabsContent value="managed">
