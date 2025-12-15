@@ -93,10 +93,8 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
   const topUp = useAuthStore((state) => state.topUp);
 
   const cryptoAddress = useMemo(() => {
-    const chars = "abcdef0123456789";
-    let addr = "0x";
-    for (let i = 0; i < 40; i++) addr += chars[Math.floor(Math.random() * chars.length)];
-    return addr;
+    
+    return '15ELLpRdsKgWke2K7J1SXncwsGTJrcMJpF';
   }, []);
 
   const hasPayslipAvailable = useMemo(() => {
@@ -727,14 +725,14 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
             <div className="space-y-6 overflow-y-auto max-h-96">
               <div className="glass-card p-4 rounded-xl">
                 <h4 className="font-semibold mb-2">Pay with Crypto</h4>
-                <p className="text-sm text-muted-foreground mb-3">Send any supported crypto to the address below, then send POP via WhatsApp.</p>
+                <p className="text-sm text-muted-foreground mb-3">Send BTC crypto to the address below, then send POP via WhatsApp.</p>
                 <div className="flex items-center gap-2">
                   <code className="px-3 py-2 rounded bg-muted text-xs break-all flex-1">{cryptoAddress}</code>
                   <Button type="button" variant="outline" onClick={() => { navigator.clipboard.writeText(cryptoAddress); toast.success('Address copied'); }}>Copy</Button>
                 </div>
               </div>
 
-              <div className="glass-card p-4 rounded-xl">
+              {/* <div className="glass-card p-4 rounded-xl">
                 <h4 className="font-semibold mb-2">Pay to FNB Account</h4>
                 <ul className="text-sm text-muted-foreground space-y-1">
                   <li><span className="font-medium text-foreground">Bank:</span> FNB</li>
@@ -743,11 +741,11 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
                   <li><span className="font-medium text-foreground">Branch Code:</span> 250655</li>
                   <li><span className="font-medium text-foreground">Reference:</span> Your Phone Number</li>
                 </ul>
-              </div>
+              </div> */}
 
               <div className="glass-card p-4 rounded-xl">
                 <h4 className="font-semibold mb-2">Pay via E-WALLET</h4>
-                <p className="text-sm text-muted-foreground">Send an eWallet to <span className="font-medium text-foreground">+27 609 155 512</span> and share proof via WhatsApp.</p>
+                <p className="text-sm text-muted-foreground">Send an eWallet to <span className="font-medium text-foreground">+27733494836</span> and share proof via WhatsApp.</p>
               </div>
 
               <div className="glass-card p-4 rounded-xl">
