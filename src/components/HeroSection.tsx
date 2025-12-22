@@ -53,7 +53,7 @@ export const HeroSection = ({ onGetStarted }: HeroSectionProps) => {
               <FileText className="w-5 h-5 transition-transform group-hover:rotate-12" />
               Generate Documents
             </Button>
-            <Button 
+            {/* <Button 
               variant="glass" 
               size="xl"
               onClick={() => navigate('/products')}
@@ -61,7 +61,7 @@ export const HeroSection = ({ onGetStarted }: HeroSectionProps) => {
             >
               <ShoppingBag className="w-5 h-5 transition-transform group-hover:scale-110" />
               Explore Products
-            </Button>
+            </Button> */}
           </div>
 
           {/* Features */}

@@ -45,8 +45,9 @@ const titleOptions = [
 ];
 
 const bankTypeOptions = [
-  { value: "tymebank", label: "TymeBank" },
   { value: "standard", label: "Standard Bank" },
+  { value: "tymebank", label: "TymeBank" },
+  { value: "CAPITEC", label: "Capitec" }
 ];
 
 

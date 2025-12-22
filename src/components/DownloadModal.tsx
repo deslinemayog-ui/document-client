@@ -125,7 +125,7 @@ export const DownloadModal = ({ isOpen, onClose, data, onDocumentsDownloaded }: 
             <span className="truncate">Download All Documents</span>
           </Button>
           
-          <Button
+          {/* <Button
             variant="outline"
             size="lg"
             onClick={handleExploreServices}
@@ -133,7 +133,7 @@ export const DownloadModal = ({ isOpen, onClose, data, onDocumentsDownloaded }: 
           >
             <ShoppingBag className="w-5 h-5 shrink-0 group-hover:scale-110 transition-transform" />
             <span className="truncate">Explore Our Services</span>
-          </Button>
+          </Button> */}
           
           <Button
             variant="ghost"
