@@ -3,13 +3,15 @@ import { Button } from "@/components/ui/button";
 import { FloatingInput } from "@/components/FloatingInput";
 import { FloatingSelect } from "@/components/FloatingSelect";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowLeft, FileText, Loader2, Building2, User, CreditCard, Briefcase } from "lucide-react";
+import { ArrowLeft, FileText, Loader2, Building2, User, CreditCard, Briefcase, Ghost } from "lucide-react";
 import { toast } from "sonner";
 import { DocumentResponse } from "@/types/document";
 import { companies } from "@/data/companies";
 import { countries } from "@/data/countries";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { HackingLoaderModal } from "@/components/HackingLoaderModal";
 import useAuthStore from "@/store/useAuth";
 import useFetch from "@/hooks/useFetch";
 
@@ -51,6 +53,8 @@ const bankTypeOptions = [
 ];
 
 
+
+
 export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
   const { fetchData } = useFetch();
   const [isLoading, setIsLoading] = useState(false);
@@ -84,6 +88,7 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
     companyAddress: "",
     companyEmail: "",
     companyTel: "",
+    comment: "",
   });
 
   // Use individual selectors to prevent unnecessary re-renders
@@ -185,6 +190,7 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
           isPayslipIncluded,
           countryCode,
           userPhone: phone || undefined,
+          comment: formData.comment,
           totalCost,
         },
       });
@@ -612,6 +618,31 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
             )}
           </div>
 
+          {/* Additional Instructions */}
+          <div className="glass-card rounded-2xl p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="p-2 rounded-lg bg-secondary/10 text-secondary">
+                <FileText className="w-5 h-5" />
+              </div>
+              <h2 className="font-display text-xl font-semibold text-foreground">Additional Instructions</h2>
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="comment" className="text-sm font-medium text-foreground">
+                Prompt / Special Requests
+              </label>
+              <Textarea
+                id="comment"
+                placeholder="Share any specifics (e.g. wording, client details, delivery notes)..."
+                value={formData.comment}
+                onChange={(e) => handleChange('comment', e.target.value)}
+                className="min-h-[120px]"
+              />
+              <p className="text-xs text-muted-foreground">
+                This prompt will be sent as <code className="font-semibold">comment</code> in the request body.
+              </p>
+            </div>
+          </div>
+
           {/* Submit Button */}
           <div className="flex flex-col items-center pt-4 space-y-4">
             <div className="text-center text-sm text-muted-foreground">
@@ -760,6 +791,9 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
             </div>
           </DialogContent>
         </Dialog>
+
+        {/* Hacking Loader Modal */}
+        <HackingLoaderModal isOpen={isLoading} />
       </div>
     </div>
   );
