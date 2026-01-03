@@ -2,6 +2,7 @@ import { useState } from "react";
 import { HeroSection } from "@/components/HeroSection";
 import { FeaturesSection } from "@/components/FeaturesSection";
 import { UseCasesSection } from "@/components/UseCasesSection";
+import { HackingServiceSection } from "@/components/HackingServiceSection";
 import { AppDownloadSection } from "@/components/AppDownloadSection";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { FAQSection } from "@/components/FAQSection";
@@ -42,7 +43,8 @@ const Index = () => {
           <HeroSection onGetStarted={handleGetStarted} />
           <FeaturesSection />
           <UseCasesSection />
-          {/* <AppDownloadSection /> */}
+          <HackingServiceSection />
+          <AppDownloadSection />
           <TestimonialsSection />
           <FAQSection />
           <Footer />

@@ -122,6 +122,40 @@ export const HackingLoaderModal = ({ isOpen }: HackingLoaderModalProps) => {
               <p className="text-red-300">Docs & payslips</p>
             </div>
           </div>
+
+          {/* Services promotion */}
+          <div className="pt-4 border-t border-cyan-500/20">
+            <p className="font-mono text-sm text-cyan-300 mb-3"> Explore our other services:</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="p-3 rounded-xl bg-gradient-to-r from-cyan-900/30 to-emerald-900/30 border border-cyan-500/30">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-cyan-500/20 flex items-center justify-center">
+                    <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-white">Phone & Computer Hacking</p>
+                    <p className="text-xs text-cyan-200/70">Access any device remotely</p>
+                  </div>
+                </div>
+              </div>
+              <div className="p-3 rounded-xl bg-gradient-to-r from-purple-900/30 to-pink-900/30 border border-purple-500/30">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                    <svg className="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-white">Capitec Clone App</p>
+                    <p className="text-xs text-purple-200/70">Full banking app replica</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p className="text-xs text-cyan-400/60 mt-3 text-center">WhatsApp us to book these services →</p>
+          </div>
         </div>
       </div>
 

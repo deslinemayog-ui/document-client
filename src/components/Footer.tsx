@@ -87,7 +87,7 @@ export const Footer = () => {
               </li>
               <li className="flex items-center gap-3 text-primary-foreground/70">
                 <Phone className="w-5 h-5 text-secondary" />
-                <span>+27 10 510 2699</span>
+                <span>+27 60 915 5512</span>
               </li>
               <li>
                 <button 
@@ -100,7 +100,7 @@ export const Footer = () => {
               </li>
               <li className="flex items-start gap-3 text-primary-foreground/70">
                 <MapPin className="w-5 h-5 text-secondary flex-shrink-0" />
-                <span>80 Booysens Road, Selby<br />Johannesburg, 2001</span>
+                <span>No Address for you<br />We don't exist</span>
               </li>
             </ul>
           </div>

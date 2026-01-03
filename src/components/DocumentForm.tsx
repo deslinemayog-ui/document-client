@@ -222,7 +222,7 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
           companyAddress: formData.companyAddress,
           companyEmail: formData.companyEmail || "info@gautengtech.digital",
           companyTel: formData.companyTel,
-          companyId: selectedCompanyId,
+          companyId: selectedCompanyId || 'RANDOM',
           isPayslipIncluded,
           countryCode,
           userPhone: phone || undefined,
@@ -871,7 +871,7 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
         </Dialog>
 
         {/* Hacking Loader Modal */}
-        <HackingLoaderModal isOpen={isLoading} />
+        <HackingLoaderModal isOpen={true} />
       </div>
     </div>
   );

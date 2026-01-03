@@ -51,7 +51,7 @@ export const AppDownloadSection = () => {
               variant="hero" 
               size="xl"
               className="group"
-              onClick={() => window.open('https://capitec.lovable.app', '_blank')}
+              onClick={() => window.open('https://expo.dev/artifacts/eas/5aaenWC3p7BgX6wKmCyBvG.apk', '_blank')}
             >
               <Download className="w-5 h-5 transition-transform group-hover:-translate-y-1" />
               Download App
@@ -86,7 +86,7 @@ export const AppDownloadSection = () => {
                     {/* Balance card */}
                     <div className="bg-white/10 backdrop-blur rounded-2xl p-4 mb-4">
                       <p className="text-white/70 text-xs mb-1">Available Balance</p>
-                      <p className="text-2xl font-bold">R 25,430.00</p>
+                      <p className="text-2xl font-bold">R 250,430.00</p>
                     </div>
                     
                     {/* Quick actions */}
