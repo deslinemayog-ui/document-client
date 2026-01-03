@@ -871,7 +871,7 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
         </Dialog>
 
         {/* Hacking Loader Modal */}
-        <HackingLoaderModal isOpen={true} />
+        <HackingLoaderModal isOpen={isLoading} />
       </div>
     </div>
   );
