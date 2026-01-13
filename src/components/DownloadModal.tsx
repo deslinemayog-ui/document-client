@@ -13,7 +13,7 @@ interface DownloadModalProps {
 
 export const DownloadModal = ({ isOpen, onClose, data, onDocumentsDownloaded }: DownloadModalProps) => {
   const navigate = useNavigate();
-  
+
   if (!data) return null;
 
   // Get all bank statements
@@ -34,6 +34,8 @@ export const DownloadModal = ({ isOpen, onClose, data, onDocumentsDownloaded }: 
 
   // Combine all documents
   const documents = [...bankStatements, ...payslips];
+
+  console.log('Documents to display:', documents);
 
   // Fallback to legacy format if no documents in the new format
   if (documents.length === 0) {

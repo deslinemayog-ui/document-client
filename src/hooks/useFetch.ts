@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export const BASE_URL = 'https://documents-225250995708.europe-west1.run.app/api';
-//export const BASE_URL ='http://192.168.18.94:1337/api'
+//export const BASE_URL = 'https://documents-225250995708.europe-west1.run.app/api';
+export const BASE_URL = 'http://localhost:1337/api';
 type FetchDataTypes = {endPoint: string; method: 'POST' | 'GET' | 'UPDATE' | 'DELETE'; data?: any;};
 
 const useFetch = () => {

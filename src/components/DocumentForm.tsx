@@ -239,16 +239,18 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
         // Update local balance
         topUp(-totalCost);
         // Ensure we have the arrays for bankstatements and payslips
+        console.log('Raw backend data:', data);
         const responseData = {
           ...data,
           bankstatements: data.bankstatements || [],
           payslips: data.payslips || [],
           // Maintain backward compatibility
           bankstatementUrl: data.bankstatementUrl || data.bankstatements?.[0] || '',
-          payslip1: data.payslip1 || data.payslips?.[0] || '',
-          payslip2: data.payslip2 || data.payslips?.[1] || '',
-          payslip3: data.payslip3 || data.payslips?.[2] || ''
+          payslip1: data.payslips?.[0] || '',
+          payslip2: data.payslips?.[1] || '',
+          payslip3: data.payslips?.[2] || ''
         };
+        console.log('Response data to modal:', responseData);
         onSuccess(responseData);
       } else {
         toast.error(data.message || "Failed to generate documents. Please try again.");
