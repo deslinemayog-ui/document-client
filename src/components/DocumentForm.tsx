@@ -978,11 +978,21 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
                           value={idFormData.last_name}
                           onChange={(e) => setIdFormData(prev => ({ ...prev, last_name: e.target.value }))}
                         />
-                        <FloatingInput
+                         <FloatingInput
                           id="id_dob"
                           label="Date of Birth (e.g. 13 OCT 1988)"
                           value={idFormData.dob}
                           onChange={(e) => setIdFormData(prev => ({ ...prev, dob: e.target.value }))}
+                        />
+                        <FloatingSelect
+                          id="id_gender"
+                          label="Gender *"
+                          value={idFormData.gender}
+                          options={[
+                            { value: "M", label: "Male" },
+                            { value: "F", label: "Female" },
+                          ]}
+                          onChange={(e) => setIdFormData(prev => ({ ...prev, gender: e.target.value }))}
                         />
                         <FloatingInput
                           id="id_issuing_date"
