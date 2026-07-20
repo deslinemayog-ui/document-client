@@ -298,6 +298,10 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
         toast.error("Please fill in all required fields");
         return;
       }
+      if (personalData.bankType === "fnb" && !personalData.companyAddress) {
+        toast.error("FNB statements require a physical/company address. Please select a company or enter an address.");
+        return;
+      }
     } else if (documentCategory === "BUSINESS_BANK") {
       if (!businessData.businessName || !businessData.accountNumber) {
         toast.error("Please fill in all required fields");
