@@ -26,9 +26,8 @@ export type Bank = {
 };
 const PROD_BASE_URL = 'https://documents-621707723909.europe-west1.run.app/api';
 const LOCAL_BASE_URL = 'http://192.168.1.100:1337/api';
-const BASE_URL = LOCAL_BASE_URL;
+const BASE_URL = PROD_BASE_URL;
 export const fetchCompanies = async (): Promise<CompanyInfo[]> => {
-  console.log("BASE_URL ", BASE_URL)
   try {
     const response:any = await axios.get(`${BASE_URL}/get_companies`);
     return Array.isArray(response.data?.data) ? response.data?.data : [];
