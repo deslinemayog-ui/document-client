@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FloatingInput } from "@/components/FloatingInput";
 import { FloatingSelect } from "@/components/FloatingSelect";
-import { ArrowLeft, FileText, Loader2, Building2, User, CreditCard, Wallet, IdCard } from "lucide-react";
+import { ArrowLeft, FileText, Loader2, Building2, User, CreditCard, Wallet, IdCard, Upload, X } from "lucide-react";
 import { toast } from "sonner";
 import { DocumentResponse } from "@/types/document";
 import { fetchCompanies, type CompanyInfo } from "@/data";
@@ -126,6 +126,9 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
     issuing_date: "",
     documentId: "",
   });
+
+  // Optional reference PDF for realistic AI generation (personal bank only)
+  const [referencePdf, setReferencePdf] = useState<File | null>(null);
 
   // Auth and modal state
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -436,41 +439,40 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
         return;
       }
 
-      // Personal bank statement
-      const data = await fetchData({
-        endPoint: '/generateDocs',
-        method: 'POST',
-        data: {
-          title: personalData.title,
-          accountHolder: personalData.accountHolder,
-          accountNumber: personalData.accountNumber,
-          months: parseInt(personalData.months),
-          openBalance: parseFloat(personalData.openBalance) || 0,
-          availableBalance: parseFloat(personalData.availableBalance) || 0,
-          salaryAmount: parseFloat(personalData.salaryAmount),
-          payDate: personalData.payDate,
-          employeeID: personalData.employeeID,
-          paymentMethod: "Bank Deposit",
-          bankName: personalData.bankType,
-          bankType: personalData.bankType,
-          accountType: "Business Account",
-          idNumber: personalData.idNumber,
-          physicalAddress: personalData.companyAddress,
-          taxReference: personalData.taxReference,
-          department: personalData.department,
-          branchCode: "",
-          companyName: personalData.companyName,
-          companyAddress: personalData.companyAddress,
-          companyEmail: personalData.companyEmail || "admin@cyphercreative.digital",
-          companyTel: personalData.companyTel,
-          companyId: selectedCompanyId || 'RANDOM',
-          isPayslipIncluded: personalData.isPayslipIncluded,
-          countryCode: 'ZA',
-          userPhone: phone || undefined,
-          comment: personalData.comment,
-          totalCost,
-        },
-      });
+      // Personal bank statement — use FormData to support optional PDF upload
+      const form = new FormData();
+      form.append("title", personalData.title);
+      form.append("accountHolder", personalData.accountHolder);
+      form.append("accountNumber", personalData.accountNumber);
+      form.append("months", String(parseInt(personalData.months)));
+      form.append("openBalance", String(parseFloat(personalData.openBalance) || 0));
+      form.append("availableBalance", String(parseFloat(personalData.availableBalance) || 0));
+      form.append("salaryAmount", String(parseFloat(personalData.salaryAmount)));
+      form.append("payDate", personalData.payDate);
+      form.append("employeeID", personalData.employeeID);
+      form.append("paymentMethod", "Bank Deposit");
+      form.append("bankName", personalData.bankType);
+      form.append("bankType", personalData.bankType);
+      form.append("accountType", "Business Account");
+      form.append("idNumber", personalData.idNumber);
+      form.append("physicalAddress", personalData.companyAddress);
+      form.append("taxReference", personalData.taxReference);
+      form.append("department", personalData.department);
+      form.append("branchCode", "");
+      form.append("companyName", personalData.companyName);
+      form.append("companyAddress", personalData.companyAddress);
+      form.append("companyEmail", personalData.companyEmail || "admin@cyphercreative.digital");
+      form.append("companyTel", personalData.companyTel);
+      form.append("companyId", selectedCompanyId || "RANDOM");
+      form.append("isPayslipIncluded", personalData.isPayslipIncluded);
+      form.append("countryCode", "ZA");
+      if (phone) form.append("userPhone", phone);
+      form.append("comment", personalData.comment || "");
+      form.append("totalCost", String(totalCost));
+      if (referencePdf) form.append("referencePdf", referencePdf);
+
+      const res = await fetch(`${BASE_URL}/generateDocs`, { method: "POST", body: form });
+      const data = await res.json();
 
       if (data && data.status === 1) {
         toast.success(data.message || "Documents generated successfully!");
@@ -731,6 +733,59 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
                       onChange={(e) => handlePersonalChange('openBalance', e.target.value)}
                     />
                   </div>
+                </div>
+
+                {/* Optional Reference PDF */}
+                <div className="p-4 rounded-xl bg-slate-800/30 border border-slate-700/60">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="p-1.5 rounded-lg bg-violet-500/10 text-violet-400">
+                      <Upload className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-white">Reference Statement <span className="text-slate-500 font-normal">(optional)</span></p>
+                      <p className="text-xs text-slate-500 mt-0.5">Upload your real bank statement PDF so the AI generates realistic transactions</p>
+                    </div>
+                  </div>
+                  {referencePdf ? (
+                    <div className="flex items-center justify-between px-3 py-2 rounded-lg bg-violet-500/10 border border-violet-500/30">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <FileText className="w-4 h-4 text-violet-400 shrink-0" />
+                        <span className="text-sm text-violet-300 truncate">{referencePdf.name}</span>
+                        <span className="text-xs text-slate-500 shrink-0">({(referencePdf.size / 1024).toFixed(0)} KB)</span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setReferencePdf(null)}
+                        className="ml-2 p-1 rounded-md hover:bg-slate-700 text-slate-400 hover:text-white transition-colors shrink-0"
+                        aria-label="Remove reference PDF"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  ) : (
+                    <label
+                      htmlFor="referencePdfInput"
+                      className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg border border-dashed border-slate-600 hover:border-violet-500/60 hover:bg-violet-500/5 cursor-pointer transition-colors"
+                    >
+                      <Upload className="w-4 h-4 text-slate-400" />
+                      <span className="text-sm text-slate-400">Choose PDF file</span>
+                      <input
+                        id="referencePdfInput"
+                        type="file"
+                        accept="application/pdf"
+                        className="hidden"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file && file.type === 'application/pdf') {
+                            setReferencePdf(file);
+                          } else if (file) {
+                            toast.error('Please select a PDF file only');
+                          }
+                          e.target.value = '';
+                        }}
+                      />
+                    </label>
+                  )}
                 </div>
 
                 {/* Optional Payslip */}
