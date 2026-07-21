@@ -58,6 +58,7 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
     title: "MR",
     accountHolder: "",
     idNumber: "",
+    physicalAddress: "",
     companyName: "",
     companyAddress: "",
     companyEmail: "",
@@ -455,7 +456,7 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
       form.append("bankType", personalData.bankType);
       form.append("accountType", "Business Account");
       form.append("idNumber", personalData.idNumber);
-      form.append("physicalAddress", personalData.companyAddress);
+      form.append("physicalAddress", personalData.physicalAddress || personalData.companyAddress);
       form.append("taxReference", personalData.taxReference);
       form.append("department", personalData.department);
       form.append("branchCode", "");
@@ -681,6 +682,14 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
                       value={personalData.employeeID}
                       onChange={(e) => handlePersonalChange('employeeID', e.target.value)}
                     />
+                    <div className="md:col-span-2">
+                      <FloatingInput
+                        id="physicalAddress"
+                        label="Physical Address"
+                        value={personalData.physicalAddress}
+                        onChange={(e) => handlePersonalChange('physicalAddress', e.target.value)}
+                      />
+                    </div>
                   </div>
                 </div>
 
