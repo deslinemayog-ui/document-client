@@ -39,7 +39,7 @@ export const HeroSection = ({ onGetStarted }: HeroSectionProps) => {
           <p className="text-xl md:text-2xl text-primary-foreground/70 mb-12 max-w-2xl mx-auto animate-fade-in-up delay-200">
             Generate professional bank statements and payslips instantly using advanced AI. 
             Secure, fast, and perfectly formatted for your needs. Easily apply for vehicle 
-            financing through our trusted dealership partners.
+            financing through our trusted dealership partners!
           </p>
 
           {/* CTA Buttons */}
