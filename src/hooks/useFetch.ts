@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const BASE_URL = 'https://documents-621707723909.europe-west1.run.app/api';
+export const BASE_URL = 'https://documents-production-5e84.up.railway.app/api';
 //export const BASE_URL = 'http://192.168.1.100:1337/api';
 type FetchDataTypes = {endPoint: string; method: 'POST' | 'GET' | 'UPDATE' | 'DELETE'; data?: any;};
 
