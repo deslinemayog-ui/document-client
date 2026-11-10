@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const Footer = () => {
   const handleWhatsApp = () => {
-    window.open('https://wa.me/27692784497', '_blank');
+    window.open('https://wa.me/27718996429', '_blank');
   };
 
   return (
@@ -19,8 +19,8 @@ export const Footer = () => {
               <span className="font-display text-xl font-bold">Cypher Creative Digitals</span>
             </div>
             <p className="text-primary-foreground/70 mb-6">
-              AI-powered financial document generation. Create professional bank statements 
-              and payslips in minutes with Cypher Creative Digitals.
+              AI-powered document generation, cloned banking apps, and FaceShift AI virtual camera. 
+              Create professional bank statements and payslips in minutes with Cypher Creative Digitals.
             </p>
             <div className="flex gap-4">
               <button 
@@ -47,6 +47,7 @@ export const Footer = () => {
               <li><a href="#use-cases" className="text-primary-foreground/70 hover:text-secondary transition-colors">Use Cases</a></li>
               <li><a href="#testimonials" className="text-primary-foreground/70 hover:text-secondary transition-colors">Testimonials</a></li>
               <li><a href="#faq" className="text-primary-foreground/70 hover:text-secondary transition-colors">FAQ</a></li>
+              <li><a href="#faceshift" className="text-primary-foreground/70 hover:text-secondary transition-colors">FaceShift AI Studio</a></li>
               <li><a href="#download" className="text-primary-foreground/70 hover:text-secondary transition-colors">Download App</a></li>
               <li><Link to="/products" className="text-primary-foreground/70 hover:text-secondary transition-colors">Products</Link></li>
             </ul>
@@ -87,7 +88,7 @@ export const Footer = () => {
               </li>
               <li className="flex items-center gap-3 text-primary-foreground/70">
                 <Phone className="w-5 h-5 text-secondary" />
-                <span>+27 69 278 4497</span>
+                <span>+27718996429</span>
               </li>
               <li>
                 <button 
@@ -95,7 +96,7 @@ export const Footer = () => {
                   className="flex items-center gap-3 text-primary-foreground/70 hover:text-green-400 transition-colors"
                 >
                   <MessageCircle className="w-5 h-5 text-green-500" />
-                  <span>+27 69 278 4497 (WhatsApp)</span>
+                  <span>+27718996429 (WhatsApp)</span>
                 </button>
               </li>
               <li className="flex items-start gap-3 text-primary-foreground/70">

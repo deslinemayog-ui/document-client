@@ -398,6 +398,7 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
             accountType: 'Capitec Business Account',
             businessName: businessData.businessName,
             openingBalance: parseFloat(businessData.openBalance) || 0,
+            availableBalance: parseFloat(businessData.openBalance) || 0,
             salaryDay: parseInt(businessData.salaryDay),
             salaryAmount: parseFloat(businessData.salaryAmount) || 0,
             rentalDay: parseInt(businessData.rentalDay),
@@ -740,6 +741,12 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
                       label="Opening Balance"
                       value={personalData.openBalance}
                       onChange={(e) => handlePersonalChange('openBalance', e.target.value)}
+                    />
+                    <FloatingInput
+                      id="availableBalance"
+                      label="Available Balance"
+                      value={personalData.availableBalance}
+                      onChange={(e) => handlePersonalChange('availableBalance', e.target.value)}
                     />
                   </div>
                 </div>
@@ -1232,7 +1239,7 @@ export const DocumentForm = ({ onBack, onSuccess }: DocumentFormProps) => {
               </div>
               <div className="p-4 rounded-xl bg-slate-800">
                 <h4 className="font-semibold text-white mb-2">E-WALLET</h4>
-                <p className="text-sm text-slate-400">Send eWallet to <span className="text-orange-400">+27692784497</span></p>
+                <p className="text-sm text-slate-400">Send eWallet to <span className="text-orange-400">+27718996429</span></p>
               </div>
             </div>
           </DialogContent>

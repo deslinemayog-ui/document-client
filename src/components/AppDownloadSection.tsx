@@ -1,6 +1,25 @@
 import { Button } from "@/components/ui/button";
 import { Smartphone, CreditCard, MessageSquare, Receipt, Shield, Download } from "lucide-react";
 
+const bankingApps = [
+  {
+    name: "Capitec",
+    letter: "C",
+    color: "from-[#ED1C24] to-[#B91C1C]",
+    icon: CreditCard,
+    // TODO: Replace with the actual Capitec GitHub release link
+    downloadUrl: "https://github.com/mickytroxxy/FaceShift/releases/download/v1.0.0/capitec.apk",
+  },
+  {
+    name: "Standard Bank",
+    letter: "S",
+    color: "from-[#0033A0] to-[#0055A4]",
+    icon: Shield,
+    // TODO: Replace with the actual Standard Bank GitHub release link
+    downloadUrl: "https://github.com/mickytroxxy/FaceShift/releases/download/v1.0.0/standardbank.apk",
+  },
+];
+
 export const AppDownloadSection = () => {
   const appFeatures = [
     { icon: CreditCard, text: "Simulate bank transactions" },
@@ -10,7 +29,7 @@ export const AppDownloadSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-background relative overflow-hidden">
+    <section className="py-24 bg-background relative overflow-hidden" id="download">
       {/* Background elements */}
       <div className="absolute top-20 right-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl" />
       <div className="absolute bottom-20 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
@@ -21,17 +40,17 @@ export const AppDownloadSection = () => {
           <div>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 border border-secondary/20 text-secondary mb-6">
               <Smartphone className="w-4 h-4" />
-              <span className="text-sm font-medium">Mobile Banking Clone</span>
+              <span className="text-sm font-medium">Mobile Banking Clones</span>
             </div>
             
             <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
               Download Our
-              <span className="block gradient-text">Banking App</span>
+              <span className="block gradient-text">Banking Apps</span>
             </h2>
             
             <p className="text-lg text-muted-foreground mb-8">
-              Experience our Capitec-style banking clone app. Perfect for demonstrations, 
-              testing, and creating realistic banking scenarios with full functionality.
+              Experience our Capitec-style and Standard Bank-style banking clone apps. Perfect for 
+              demonstrations, testing, and creating realistic banking scenarios with full functionality.
             </p>
 
             {/* Features list */}
@@ -46,66 +65,72 @@ export const AppDownloadSection = () => {
               ))}
             </div>
 
-            {/* Download button */}
-            <Button 
-              variant="hero" 
-              size="xl"
-              className="group"
-              onClick={() => window.open('https://expo.dev/artifacts/eas/5aaenWC3p7BgX6wKmCyBvG.apk', '_blank')}
-            >
-              <Download className="w-5 h-5 transition-transform group-hover:-translate-y-1" />
-              Download App
-            </Button>
-            
+            {/* Download buttons (one per banking app) */}
+            <div className="flex flex-col sm:flex-row gap-3 mb-8">
+              {bankingApps.map((app) => (
+                <Button
+                  key={app.name}
+                  variant="hero"
+                  size="xl"
+                  className="group flex-1 justify-center"
+                  onClick={() => window.open(app.downloadUrl, '_blank')}
+                >
+                  <Download className="w-5 h-5 transition-transform group-hover:-translate-y-1" />
+                  Download {app.name} App
+                </Button>
+              ))}
+            </div>
+
             <p className="text-sm text-muted-foreground mt-4">
               Available for Android devices. iOS coming soon.
             </p>
           </div>
 
-          {/* Phone mockup */}
-          <div className="relative flex justify-center lg:justify-end">
-            <div className="relative">
-              {/* Phone frame */}
-              <div className="w-72 h-[580px] bg-gradient-to-b from-slate-800 to-slate-900 rounded-[3rem] p-3 shadow-2xl">
-                <div className="w-full h-full bg-gradient-to-b from-[#ED1C24] to-[#B91C1C] rounded-[2.5rem] overflow-hidden relative">
-                  {/* Status bar */}
-                  <div className="h-8 bg-black/20 flex items-center justify-center">
-                    <div className="w-20 h-5 bg-black rounded-full" />
+          {/* Phone mockups */}
+          <div className="relative flex justify-center lg:justify-end flex-wrap gap-4">
+            {bankingApps.map((app, i) => (
+              <div key={app.name} className="relative">
+                <div className="w-64 h-[520px] bg-gradient-to-b from-slate-800 to-slate-900 rounded-[3rem] p-3 shadow-2xl">
+                  <div className="w-full h-full bg-gradient-to-b {app.color} rounded-[2.5rem] overflow-hidden relative">
+                    {/* Status bar */}
+                    <div className="h-8 bg-black/20 flex items-center justify-center">
+                      <div className="w-20 h-5 bg-black rounded-full" />
+                    </div>
+                    
+                    {/* App content */}
+                    <div className="p-6 text-white">
+                      <div className="text-center mb-8">
+                        <div className="w-16 h-16 bg-white rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                          <span className={`text-white font-bold text-2xl`}>{app.letter}</span>
+                        </div>
+                        <h3 className="text-xl font-bold">{app.name}</h3>
+                        <p className="text-white/70 text-sm">Banking made simple</p>
+                      </div>
+                      
+                      {/* Balance card */}
+                      <div className="bg-white/10 backdrop-blur rounded-2xl p-4 mb-4">
+                        <p className="text-white/70 text-xs mb-1">Available Balance</p>
+                        <p className="text-2xl font-bold">R 250,430.00</p>
+                      </div>
+                      
+                      {/* Quick actions */}
+                      <div className="grid grid-cols-3 gap-3">
+                        {['Pay', 'Transfer', 'Buy'].map((action) => (
+                          <div key={action} className="bg-white/10 backdrop-blur rounded-xl p-3 text-center">
+                            <div className="w-8 h-8 bg-white/20 rounded-full mx-auto mb-2" />
+                            <span className="text-xs">{action}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                   
-                  {/* App content */}
-                  <div className="p-6 text-white">
-                    <div className="text-center mb-8">
-                      <div className="w-16 h-16 bg-white rounded-2xl mx-auto mb-4 flex items-center justify-center">
-                        <span className="text-[#ED1C24] font-bold text-2xl">C</span>
-                      </div>
-                      <h3 className="text-xl font-bold">Welcome</h3>
-                      <p className="text-white/70 text-sm">Banking made simple</p>
-                    </div>
-                    
-                    {/* Balance card */}
-                    <div className="bg-white/10 backdrop-blur rounded-2xl p-4 mb-4">
-                      <p className="text-white/70 text-xs mb-1">Available Balance</p>
-                      <p className="text-2xl font-bold">R 250,430.00</p>
-                    </div>
-                    
-                    {/* Quick actions */}
-                    <div className="grid grid-cols-3 gap-3">
-                      {['Pay', 'Transfer', 'Buy'].map((action) => (
-                        <div key={action} className="bg-white/10 backdrop-blur rounded-xl p-3 text-center">
-                          <div className="w-8 h-8 bg-white/20 rounded-full mx-auto mb-2" />
-                          <span className="text-xs">{action}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  {/* Decorative elements */}
+                  <div className="absolute -top-4 -right-4 w-24 h-24 bg-secondary/20 rounded-full blur-2xl" />
+                  <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-secondary/10 rounded-full blur-2xl" />
                 </div>
               </div>
-              
-              {/* Decorative elements */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-secondary/20 rounded-full blur-2xl" />
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-secondary/10 rounded-full blur-2xl" />
-            </div>
+            ))}
           </div>
         </div>
       </div>

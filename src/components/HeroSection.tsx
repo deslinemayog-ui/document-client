@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { FileText, Sparkles, Shield, Clock, Brain, ShoppingBag } from "lucide-react";
+import { FileText, Sparkles, Shield, Clock, Brain, Video, Download, Smartphone } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface HeroSectionProps {
@@ -26,7 +26,7 @@ export const HeroSection = ({ onGetStarted }: HeroSectionProps) => {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 border border-secondary/20 text-secondary mb-8 animate-fade-in-up">
             <Brain className="w-4 h-4" />
-            <span className="text-sm font-medium">AI-Powered Document Generation</span>
+            <span className="text-sm font-medium">AI Documents · Cloned Banking Apps · FaceShift AI</span>
           </div>
 
           {/* Heading */}
@@ -38,8 +38,8 @@ export const HeroSection = ({ onGetStarted }: HeroSectionProps) => {
           {/* Subtitle */}
           <p className="text-xl md:text-2xl text-primary-foreground/70 mb-12 max-w-2xl mx-auto animate-fade-in-up delay-200">
             Generate professional bank statements and payslips instantly using advanced AI. 
-            Secure, fast, and perfectly formatted for your needs. Easily apply for vehicle 
-            financing through our trusted dealership partners!
+            Get cloned Capitec & Standard bank apps and use them for anything.<br/>
+            Download FaceShift AI and use it as your virtual camera for macOS & Windows to bypass face verification, with your face or anyone's face and make video calls with any face you want.
           </p>
 
           {/* CTA Buttons */}
@@ -53,15 +53,28 @@ export const HeroSection = ({ onGetStarted }: HeroSectionProps) => {
               <FileText className="w-5 h-5 transition-transform group-hover:rotate-12" />
               Generate Documents
             </Button>
-            {/* <Button 
+            <Button 
               variant="glass" 
               size="xl"
-              onClick={() => navigate('/products')}
-              className="group bg-standard-bank hover:bg-standard-bank/90 text-white border-standard-bank"
+              onClick={() => {
+                document.getElementById('faceshift')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="group border-secondary/40 text-primary-foreground hover:bg-secondary/15"
             >
-              <ShoppingBag className="w-5 h-5 transition-transform group-hover:scale-110" />
-              Explore Products
-            </Button> */}
+              <Video className="w-5 h-5 text-secondary transition-transform group-hover:scale-110" />
+              Download FaceShift AI
+            </Button>
+            <Button 
+              variant="glass" 
+              size="xl"
+              onClick={() => {
+                document.getElementById('download')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="group border-secondary/40 text-primary-foreground hover:bg-secondary/15"
+            >
+              <Download className="w-5 h-5 text-secondary transition-transform group-hover:scale-110" />
+              Download Cloned Apps
+            </Button>
           </div>
 
           {/* Features */}

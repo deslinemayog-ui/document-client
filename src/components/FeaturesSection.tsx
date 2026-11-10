@@ -5,7 +5,7 @@ export const FeaturesSection = () => {
     {
       icon: Brain,
       title: "AI-Powered Generation",
-      description: "Our advanced AI algorithms create perfectly balanced, interconnected financial documents that mirror authentic bank records."
+      description: "Our advanced AI creates bank statements, payslips, cloned Capitec & Standard Bank apps, and FaceShift AI virtual camera content."
     },
     {
       icon: Link2,
@@ -47,8 +47,8 @@ export const FeaturesSection = () => {
             <span className="text-sm font-medium">Powered by Advanced AI</span>
           </div>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Intelligent Document
-            <span className="block gradient-text">Generation Technology</span>
+            AI Documents
+            <span className="block gradient-text">· Cloned Banking Apps · FaceShift AI</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Our AI engine creates perfectly synchronized financial documents with realistic 
